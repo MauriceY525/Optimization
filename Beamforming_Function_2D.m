@@ -31,13 +31,21 @@ mesh(Range_x,Range_y,abs(AF2));title('Array Factor');xlabel('Angle/°');ylabel('
 
 AF_max = max(AF2(:));
 figure(2)
-mesh(Range_x,Range_y,abs(AF2)/abs(AF_max));title('Array Factor-Normalized');xlabel('Angle/°');ylabel('Angle/°');zlabel('Amplitude');grid on;
+mesh(Range_x,Range_y,20*log10(abs(AF2)/(abs(AF_max))));
+title('Array Factor-Normalized');
+xlabel('Angle/°');ylabel('Angle/°');zlabel('AF/dB');
+colorbar;
+zlim([-40 0]);
+clim([-40 0]);
+grid on;
 
 [x,y] = meshgrid(Range_x,Range_y);
 [X,Y,Z] = sph2cart(deg2rad(x),deg2rad(y),abs(AF2));
 figure(3);
-mesh(Z,Y,X);xlabel('X');ylabel('Y');zlabel('Z');title('Beamforming-3D');
-xlim([-80 80]);ylim([-80 80]);
+mesh(Z,Y,X);xlabel('X');ylabel('Y');zlabel('Z');
+title('Beamforming-3D');
+xlim([-80 80]);
+ylim([-80 80]);
 
 
 %% Function of AF (qwer)

@@ -1,6 +1,5 @@
 function f = objfun_1D(x1,x2,x3,x4,x5,x6,x7,x8,y1,y2,y3,y4,y5,y6,y7,y8)
 
-
 %% initialization
 c = physconst('LightSpeed');
 freq = 2.4e9;
@@ -16,7 +15,6 @@ Theta = linspace(-90,90,Ns);
 
 %% Get the Beamforming
 AFx = getBeam(A,Theta,lambda,Phi,d,N);
-
 load('AF1.mat');
 diff = AF1 - AFx;
 
@@ -35,7 +33,6 @@ R = R/Ns;
 R = 10*log10(R);
 disp(R);
 
-
 P = 0;
 AFx = abs(AF1);
 AFx = AFx.^2;
@@ -52,14 +49,4 @@ disp(AFx);
 J = R - P;
 disp(J);
 f = J;
-
-
-% 1D view
-AF1_max = max(AF1);
-AFx_max = max(AFx);
-
-figure(1)
-plot(Theta, abs(AFx)/abs(AFx_max), 'r');
-hold on;
-plot(Theta, abs(AF1)/abs(AF1_max), 'g');
 end
